@@ -1,30 +1,19 @@
-
+import { memo } from "react";
 import { H5, Code, FormGroup, Callout } from "@blueprintjs/core";
 import { version, branch, commit } from '../version';
-
-const About = () => {
-    return (
-        <>
+const About = memo(() => {
+  return <>
             <H5>
                 About this chrome extension
             </H5>
-            <FormGroup
-                subLabel="Release version:"
-                labelFor="text-input"
-            >
-                <Code id="text-input" >{version}</Code>
+            <FormGroup subLabel="Release version:" labelFor="text-input">
+                <Code id="text-input">{version}</Code>
             </FormGroup>
-            <FormGroup
-                subLabel="Release branch:"
-                labelFor="text-input"
-            >
-                <Code id="text-input" >{branch}</Code>
+            <FormGroup subLabel="Release branch:" labelFor="text-input">
+                <Code id="text-input">{branch}</Code>
             </FormGroup>
-            <FormGroup
-                subLabel="Release commit:"
-                labelFor="text-input"
-            >
-                <Code id="text-input" >{commit}</Code>
+            <FormGroup subLabel="Release commit:" labelFor="text-input">
+                <Code id="text-input">{commit}</Code>
             </FormGroup>
 
             <Callout intent="primary" title="Open-source disclaimer " icon="heart">
@@ -32,8 +21,6 @@ const About = () => {
                 It uses <a target="_blank" href="https://blueprintjs.com/">Blueprint</a> from Palantir for UI components. Feel free to request features and contribute to the code on <a target="_blank" href="https://github.com/KochC/Foundry-Pro-Chrome-Extension">Github</a>.
             </Callout>
 
-        </>
-    );
-};
-
-export default About
+        </>;
+});
+export default About;

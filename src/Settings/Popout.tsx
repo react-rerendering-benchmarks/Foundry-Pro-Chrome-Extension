@@ -1,6 +1,6 @@
-
+import { memo } from "react";
 import styled from 'styled-components';
-import extension_icon from '../icon/icon48_light.png'
+import extension_icon from '../icon/icon48_light.png';
 import { AnchorButton, Button, Tabs, Tab } from "@blueprintjs/core";
 import { version } from '../version';
 import About from './About';
@@ -9,7 +9,6 @@ import CustomLinks from './CustomLinks';
 import SecretGuard from './CodeGuard';
 import { initial_settings, useStore } from '../Store';
 import React, { useEffect } from 'react';
-
 const Category = styled.p`
     color: #5F6B7C;
     margin: 0;
@@ -21,18 +20,16 @@ const Category = styled.p`
     &:first-of-type{
         padding-top: 0;
     }
-`
-
+`;
 const Box = styled.div`
     min-width: 300px;
     width: 100%;
     max-width: 700px;
-`
-
+`;
 const Logo = styled.img`
     margin-bottom: -4.5px;
     margin-right: 5px;
-`
+`;
 const PopoverHeader = styled.div`
     background: rgb(179,179,179);
     background: linear-gradient(0deg, rgba(230,230,230,1) 0%, rgba(240,240,240,1) 100%);
@@ -44,8 +41,7 @@ const PopoverHeader = styled.div`
         font-weight: normal;
         display: inline-block;
     }
-`
-
+`;
 const PopoverBody = styled.div`
     background: white;
     border-radius: 0 0 3px 3px;
@@ -60,8 +56,7 @@ const PopoverBody = styled.div`
     & .bp4-tab-panel{
         padding-left: 10px !important;
     }
-`
-
+`;
 const PopoverFooter = styled.div`
     border-top: 1px solid lightgray;
     background: white;
@@ -69,22 +64,18 @@ const PopoverFooter = styled.div`
     background: rgb(240,240,240);
     display: flex;
     padding: 10px;
-`
-
-const Settings = () => {
-    let ref = React.createRef<HTMLInputElement>();
-
-    const { settings, setSettings } = useStore()
-
-    const reset = () => {
-        setSettings(initial_settings)
-    }
-
-    useEffect(() => {
-    }, [])
-
-    return (
-        <Box>
+`;
+const Settings = memo(() => {
+  let ref = React.createRef<HTMLInputElement>();
+  const {
+    settings,
+    setSettings
+  } = useStore();
+  const reset = () => {
+    setSettings(initial_settings);
+  };
+  useEffect(() => {}, []);
+  return <Box>
             <PopoverHeader ref={ref}>
                 <Logo height="25px" src={extension_icon} /><h3>Foundry Pro</h3>
                 <p className="bp4-text-muted bp4-text-small">
@@ -93,13 +84,7 @@ const Settings = () => {
                 </p>
             </PopoverHeader>
             <PopoverBody>
-                <Tabs
-                    animate={true}
-                    id="TabsExample"
-                    key={"vertical"}
-                    renderActiveTabPanelOnly={false}
-                    vertical={true}
-                >
+                <Tabs animate={true} id="TabsExample" key={"vertical"} renderActiveTabPanelOnly={false} vertical={true}>
                     <Category>General Config</Category>
                     <Tab id="rx" title="Custom Links" panel={<CustomLinks />} />
                     <Tab id="ng" title="Custom Host" panel={<CustomHost />} />
@@ -111,14 +96,10 @@ const Settings = () => {
             </PopoverBody>
             <PopoverFooter>
                 <AnchorButton small minimal={true} icon="issue" text="Report an issue on Github" target="_blank" href="https://github.com/KochC/Foundry-Pro-Chrome-Extension/issues" />
-                {version === "local" ?
-                    <Button intent="danger" minimal={true} onClick={reset}>
+                {version === "local" ? <Button intent="danger" minimal={true} onClick={reset}>
                         Reset Settings!
-                    </Button> : ""
-                }
+                    </Button> : ""}
             </PopoverFooter>
-        </Box>
-    );
-};
-
+        </Box>;
+});
 export default Settings;
